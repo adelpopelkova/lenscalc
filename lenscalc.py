@@ -4,26 +4,26 @@ from sympy.solvers import solve
 
 
 class Lens:
-    variables = "Φ_OS", "Φ_IS", "Φ", "n_OS", "n_L", "n_IS", "R_1", "R_2", "CT", "P", "P_2", "f_F", "f_R", "EFL", "FFL", "BFL", "NPS"
+    variables = "D1", "D2", "D", "n1", "nL", "n2", "r1", "r2", "CT", "P1", "P2", "f1", "f2", "EFL", "FFL", "BFL", "NPS"
 
     for variable in variables:
         vars()[variable] = symbols(variable)
 
     equations = (
-        Eq(Φ_OS, (n_L - n_OS) / R_1),
-        Eq(Φ_IS, (n_IS - n_L) / R_2),
-        Eq(Φ, Φ_OS + Φ_IS - Φ_OS * Φ_IS * (CT / n_L)),
-        Eq(P, (Φ_IS / Φ) * (n_OS / n_L) * CT),
-        Eq(P_2, -(Φ_OS / Φ) * (n_IS / n_L) * CT),
-        Eq(EFL, 1 / Φ),
-        Eq(f_F, -n_OS * EFL),
-        Eq(f_R, n_IS * EFL),
-        Eq(BFL, f_R + P_2),
-        Eq(FFL, f_F + P),
-        Eq(NPS, f_R + f_F),
+        Eq(D1, (nL - n1) / r1),
+        Eq(D2, (n2 - nL) / r2),
+        Eq(D, D1 + D2 - D1 * D2 * (CT / nL)),
+        Eq(P1, (D2 / D) * (n1 / nL) * CT),
+        Eq(P2, -(D1 / D) * (n2 / nL) * CT),
+        Eq(EFL, 1 / D),
+        Eq(f1, -n1 * EFL),
+        Eq(f2, n2 * EFL),
+        Eq(BFL, f2 + P2),
+        Eq(FFL, f1 + P1),
+        Eq(NPS, f2 + f1),
     )
 
-    def __init__(self, *, Φ_OS=None, Φ_IS=None, Φ=None, n_OS=None, n_L=None, n_IS=None, R_1=None, R_2=None, CT=None, P=None, P_2=None, f_F=None, f_R=None, EFL=None, FFL=None, BFL=None, NPS=None):
+    def __init__(self, *, D1=None, D2=None, D=None, n1=None, nL=None, n2=None, r1=None, r2=None, CT=None, P1=None, P2=None, f1=None, f2=None, EFL=None, FFL=None, BFL=None, NPS=None):
         self.parameters = locals()
         del self.parameters["self"]
     
