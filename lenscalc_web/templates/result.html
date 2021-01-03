@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Lens calculator</title>
+    </head>
+
+    <body>
+
+        <h1>Result is...</h1>
+
+        <ul>
+
+            {% for variable in variables %}
+                {% if variable in values %}
+
+                    <li>
+                        {{variable}} = {{values[variable]}}
+                    </li>
+
+                {% else %}
+
+                    <li>
+                        {{variable}} = None
+                    </li>
+
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+
+    </body>
+
+</html>
+
