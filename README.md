@@ -34,7 +34,7 @@ Calculate the lens using the `calculate` method.
 To run the web app locally, use the following comands.
 (On Windows use `set` instead of `export`.)
 ```
-export FLASK_APP=lenscalc-web/app.py
+export FLASK_APP=lenscalc_web
 export FLASK_ENV=development
 flask run
 ```
