@@ -39,3 +39,8 @@ export FLASK_ENV=development
 flask run
 ```
 
+## Testing the calculator
+Use this command to get also the time of the 5 slowest tests.
+```
+$ python -m pytest -v --durations=5
+```
