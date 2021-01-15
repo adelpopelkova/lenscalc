@@ -6,7 +6,7 @@
 
 There are two ways how you can create the lens:
 The first one:
-```
+```python
 l = Lens(
     n1 = 1.0003,
     nL = 1.5,
@@ -17,7 +17,7 @@ l = Lens(
 )
 ```
 The second one:
-```
+```python
 l = Lens()
 l.n1 = 1.0003
 l.nL = 1.5
@@ -34,9 +34,9 @@ Calculate the lens using the `calculate` method.
 To run the web app locally, use the following comands.
 (On Windows use `set` instead of `export`.)
 ```
-export FLASK_APP=lenscalc_web
-export FLASK_ENV=development
-flask run
+$ export FLASK_APP=lenscalc_web
+$ export FLASK_ENV=development
+$ flask run
 ```
 
 ## Testing the calculator
