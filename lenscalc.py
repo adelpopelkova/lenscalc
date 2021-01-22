@@ -64,9 +64,19 @@ class Lens:
             print("Nothing to compute. All variables have their values!")
             return
         solved_equations = nonlinsolve(self.equations, missing_values)
+        # sympy.solvers.solveset.nonlinsolve returns a FiniteSet.
+        # The problem with it is that it isn't subscriptable.
+        # In the case of lenscalc, there is only one solution,
+        # which can't be taken out using solved_equations[0].
+        # FiniteSet has an args method which can be used to get out the result.
+        # https://docs.sympy.org/latest/tutorial/manipulation.html#args
         solved_equations = solved_equations.args
         for variable, solved_equation in zip(missing_values, solved_equations[0]):
             if isinstance(solved_equation, Complement):
+                # This variable assignment below is used,
+                # so that all variables are of the same type.
+                # The first args[0] gets the equation from the Complement.
+                # The result is a FiniteSet, that's why args[0] is used again.
                 solved_equation = solved_equation.args[0].args[0]
             setattr(self, variable, solved_equation.subs(self.replacements))
 
