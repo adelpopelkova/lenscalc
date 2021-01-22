@@ -1,6 +1,7 @@
 from sympy import symbols, Eq
 from sympy.core.symbol import Symbol
-from sympy.solvers import solve
+from sympy.sets.sets import Complement
+from sympy.solvers.solveset import nonlinsolve
 
 
 class Lens:
@@ -62,10 +63,13 @@ class Lens:
         if not missing_values:
             print("Nothing to compute. All variables have their values!")
             return
-        solved_equations = solve(self.equations, missing_values)
+        solved_equations = nonlinsolve(self.equations, missing_values)
+        solved_equations = solved_equations.args
         for variable, solved_equation in zip(missing_values, solved_equations[0]):
+            if isinstance(solved_equation, Complement):
+                solved_equation = solved_equation.args[0].args[0]
             setattr(self, variable, solved_equation.subs(self.replacements))
-    
+
     def __str__(self):
         return "\n".join(f"{var}: {self.parameters[var]}" for var in self.variables)
     
