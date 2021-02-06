@@ -63,9 +63,15 @@ class Lens:
             print("Nothing to compute. All variables have their values!")
             return
         solved_equations = solve(self.equations, missing_values)
+        if isinstance(solved_equations, dict):
+            for variable in missing_values:
+                setattr(self, variable, solved_equations[symbols(variable)].subs(self.replacements))
+            return
+        if not len(solved_equations):
+            raise ValueError("SymPy doesn't want to calculate this input!")
         for variable, solved_equation in zip(missing_values, solved_equations[0]):
             setattr(self, variable, solved_equation.subs(self.replacements))
-    
+
     def __str__(self):
         return "\n".join(f"{var}: {self.parameters[var]}" for var in self.variables)
     

@@ -44,3 +44,7 @@ Use this command to get also the time of the 5 slowest tests.
 ```
 $ python -m pytest -v --durations=5
 ```
+If you don't want to run the tests with the combinations, use this command:
+```
+$ python -m pytest -v -k test_lenscalc.py 
+```
