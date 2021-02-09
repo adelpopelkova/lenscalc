@@ -11,11 +11,6 @@ single_variable_passing = [("r1",), ("r2",), ("FFL",), ("BFL",), ("NPS",)]
 single_variable_failing = [("D1",), ("D2",), ("D",), ("n1",), ("nL",), ("n2",), ("CT",), ("P1",), ("P2",), ("f1",), ("f2",), ("EFL",)]
 
 pairs = combinations(Lens.variables, 2)
-# itertools.combinations returns an ordered iterable,
-# that is why it is possible to search by the indexes.
-# To search by indexes it is needed to make it a list.
-# pairs_passing_indexes = 81, 88, 89, 90, 97, 98, 99, 112, 119, 133, 134, 135
-# pairs_passing = [pairs[index] for index in pairs_passing_indexes]
 pairs_passing = [
     ('r1', 'r2'),
     ('r1', 'FFL'),
@@ -33,11 +28,6 @@ pairs_passing = [
 pairs_failing = [pair for pair in pairs if pair not in pairs_passing]
 
 triplets = combinations(Lens.variables, 3)
-# itertools.combinations returns an ordered iterable,
-# that is why it is possible to search by the indexes.
-# To search by indexes it is needed to make it a list.
-# triplets_passing_indexes = 521, 522, 523, 536, 543, 557, 558, 559, 572, 579, 593, 594, 595, 642, 643, 657, 659, 668, 675, 679
-# triplets_passing = [triplets[index] for index in triplets_passing_indexes]
 triplets_passing = [
     ('r1', 'r2', 'FFL'),
     ('r1', 'r2', 'BFL'),
