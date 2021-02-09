@@ -5,9 +5,10 @@
 ## How to use the calculator
 
 There are two ways how you can create the lens:
+
 The first one:
 ```python
-l = Lens(
+lens = Lens(
     n1 = 1.0003,
     nL = 1.5,
     n2 = 1.0003,
@@ -18,13 +19,13 @@ l = Lens(
 ```
 The second one:
 ```python
-l = Lens()
-l.n1 = 1.0003
-l.nL = 1.5
-l.n2 = 1.0003
-l.r1 = 50
-l.r2 = -40
-l.CT = 3
+lens = Lens()
+lens.n1 = 1.0003
+lens.nL = 1.5
+lens.n2 = 1.0003
+lens.r1 = 50
+lens.r2 = -40
+lens.CT = 3
 ```
 
 Calculate the lens using the `calculate` method.
