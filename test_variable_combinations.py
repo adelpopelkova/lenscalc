@@ -7,58 +7,55 @@ from lenscalc import Lens
 
 
 # Create lists for parametrized tests
-single_variable_passing = [("r1",), ("r2",), ("FFL",), ("BFL",), ("NPS",)]
-single_variable_failing = [("D1",), ("D2",), ("D",), ("n1",), ("nL",), ("n2",), ("CT",), ("P1",), ("P2",), ("f1",), ("f2",), ("EFL",)]
+single_variables = combinations(Lens.variables, 1)
 
 pairs = combinations(Lens.variables, 2)
-pairs_passing = [
-    ('r1', 'r2'),
-    ('r1', 'FFL'),
-    ('r1', 'BFL'),
-    ('r1', 'NPS'),
-    ('r2', 'FFL'),
-    ('r2', 'BFL'),
-    ('r2', 'NPS'),
-    ('P1', 'FFL'),
-    ('P2', 'BFL'),
-    ('FFL', 'BFL'),
-    ('FFL', 'NPS'),
-    ('BFL', 'NPS')
+pairs_failing = [
+    ('f1', 'NPS'),
+    ('f2', 'NPS')
 ]
-pairs_failing = [pair for pair in pairs if pair not in pairs_passing]
+pairs_passing = [pair for pair in pairs if pair not in pairs_failing]
 
 triplets = combinations(Lens.variables, 3)
-triplets_passing = [
-    ('r1', 'r2', 'FFL'),
-    ('r1', 'r2', 'BFL'),
-    ('r1', 'r2', 'NPS'),
-    ('r1', 'P1', 'FFL'),
-    ('r1', 'P2', 'BFL'),
-    ('r1', 'FFL', 'BFL'),
-    ('r1', 'FFL', 'NPS'),
-    ('r1', 'BFL', 'NPS'),
-    ('r2', 'P1', 'FFL'),
-    ('r2', 'P2', 'BFL'),
-    ('r2', 'FFL', 'BFL'),
-    ('r2', 'FFL', 'NPS'),
-    ('r2', 'BFL', 'NPS'),
-    ('P1', 'FFL', 'BFL'),
-    ('P1', 'FFL', 'NPS'),
-    ('P2', 'FFL', 'BFL'),
-    ('P2', 'BFL', 'NPS'),
+triplets_failing = [
+    ('D1', 'D2', 'nL'),  # This one ends up with the ValueError.
+    ('D1', 'f1', 'NPS'),
+    ('D1', 'f2', 'NPS'),
+    ('D2', 'f1', 'NPS'),
+    ('D2', 'f2', 'NPS'),
+    ('D', 'f1', 'NPS'),
+    ('D', 'f2', 'NPS'),
+    ('n1', 'f1', 'NPS'),
+    ('n1', 'f2', 'NPS'),
+    ('nL', 'f1', 'NPS'),
+    ('nL', 'f2', 'NPS'),
+    ('n2', 'f1', 'NPS'),
+    ('n2', 'f2', 'NPS'),
+    ('r1', 'f1', 'NPS'),
+    ('r1', 'f2', 'NPS'),
+    ('r2', 'f1', 'NPS'),
+    ('r2', 'f2', 'NPS'),
+    ('CT', 'f1', 'NPS'),
+    ('CT', 'f2', 'NPS'),
+    ('P1', 'f1', 'NPS'),
+    ('P1', 'f2', 'NPS'),
+    ('P2', 'f1', 'NPS'),
+    ('P2', 'f2', 'NPS'),
+    ('f1', 'EFL', 'NPS'),
     ('f1', 'FFL', 'NPS'),
-    ('f2', 'BFL', 'NPS'),
-    ('FFL', 'BFL', 'NPS')
+    ('f1', 'BFL', 'NPS'),
+    ('f2', 'EFL', 'NPS'),
+    ('f2', 'FFL', 'NPS'),
+    ('f2', 'BFL', 'NPS')
 ]
-triplets_failing = [triplet for triplet in triplets if triplet not in triplets_passing]
+triplets_passing = [triplet for triplet in triplets if triplet not in triplets_failing]
 
 combinations_passing = chain(
-    single_variable_passing,
+    single_variables,
     pairs_passing,
     triplets_passing
 )
 combinations_failing = chain(
-    single_variable_failing,
     pairs_failing,
     triplets_failing
 )

@@ -1,5 +1,6 @@
 from sympy import symbols, Eq
 from sympy.core.symbol import Symbol
+from sympy.core.expr import Expr
 from sympy.solvers import solve
 
 
@@ -58,17 +59,57 @@ class Lens:
 
     def calculate(self):
         self.replacements = self._calculate_replacements()
-        missing_values = [v for v in self.variables if v not in self.replacements]
+        missing_values = {symbols(v) for v in self.variables if v not in self.replacements}
+
         if not missing_values:
             print("Nothing to compute. All variables have their values!")
             return
+
+        # Copy the lens equations to later manipulate with them.
+        self.equations = list(self.equations)
+
+        equation_index = 0
+        while missing_values and equation_index < len(self.equations):
+            equation = self.equations[equation_index]
+            common = missing_values & equation.free_symbols
+
+            if not common:
+                self.equations.remove(equation)
+
+            elif len(common) == 1:
+                variable = list(common)[0]
+                solved_equation = solve(equation, variable)
+
+                if isinstance(solved_equation, list):
+                    solved_equation = solved_equation[0]
+
+                if isinstance(solved_equation, dict):
+                    self.replacements[variable] = solved_equation[variable].subs(self.replacements)
+
+                if isinstance(solved_equation, Expr):
+                    self.replacements[variable] = solved_equation.subs(self.replacements)
+
+                setattr(self, str(variable), self.replacements[variable])
+                missing_values.remove(variable)
+                self.equations.remove(equation)
+                equation_index = 0
+
+            else:
+                equation_index += 1
+
+        if not missing_values:
+            return
+
+        missing_values = [str(variable) for variable in missing_values]
         solved_equations = solve(self.equations, missing_values)
         if isinstance(solved_equations, dict):
             for variable in missing_values:
                 setattr(self, variable, solved_equations[symbols(variable)].subs(self.replacements))
             return
+
         if not len(solved_equations):
             raise ValueError("SymPy doesn't want to calculate this input!")
+
         for variable, solved_equation in zip(missing_values, solved_equations[0]):
             setattr(self, variable, solved_equation.subs(self.replacements))
 
