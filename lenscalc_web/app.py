@@ -17,12 +17,10 @@ def result(variables=None, values=None):
         if flask.request.args[arg] != "":
             replacements[arg] = flask.request.args[arg]
 
-    l = Lens(**replacements)
-    l.calculate()
+    lens = Lens(**replacements)
+    lens.calculate()
 
-    for var in dir(l):
-        if var in Lens.variables:
-            replacements[var] = l.__getattribute__(var)
+    values = lens.__dict__["parameters"]
 
-    return flask.render_template("result.html", variables=Lens.variables, values=replacements)
+    return flask.render_template("result.html", variables=Lens.variables, values=values)
 
