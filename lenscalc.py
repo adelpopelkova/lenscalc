@@ -88,12 +88,12 @@ class Lens:
                     solved_equation = solved_equation[0]
 
                 if isinstance(solved_equation, dict):
-                    self.replacements[variable] = solved_equation[variable].subs(self.replacements)
+                    self.replacements[str(variable)] = solved_equation[variable].subs(self.replacements)
 
                 if isinstance(solved_equation, Expr):
-                    self.replacements[variable] = solved_equation.subs(self.replacements)
+                    self.replacements[str(variable)] = solved_equation.subs(self.replacements)
 
-                setattr(self, str(variable), self.replacements[variable])
+                setattr(self, str(variable), self.replacements[str(variable)])
                 missing_values.remove(variable)
                 self.equations.remove(equation)
                 equation_index = 0
