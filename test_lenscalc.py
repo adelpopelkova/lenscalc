@@ -140,17 +140,15 @@ def test_calculate_with_all_variables(capsys):
     assert "Nothing to compute." in captured.out
 
 
-@pytest.mark.skip(reason="Currently gets into an infinite loop.")
 @pytest.mark.timeout(120)
 def test_calculate_with_no_variables():
     """
     Test calculation with no variables given.
-
-    This test should fail, due to the timeout.
     """
     l = Lens()
 
-    l.calculate()
+    with pytest.raises(ValueError):
+        l.calculate()
 
 
 @pytest.mark.timeout(120)  # This test is kind of slow.
