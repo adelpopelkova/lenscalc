@@ -59,8 +59,12 @@ class Lens:
 
     def calculate(self):
         self.replacements = self._calculate_replacements()
-        missing_values = {symbols(v) for v in self.variables if v not in self.replacements}
+        # Calculation without any variables isn't supported
+        # because `sympy.solve` gets into an infinite loop.
+        if not self.replacements:
+            raise ValueError("No variables were given!")
 
+        missing_values = {symbols(v) for v in self.variables if v not in self.replacements}
         if not missing_values:
             print("Nothing to compute. All variables have their values!")
             return
