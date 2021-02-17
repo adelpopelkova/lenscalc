@@ -177,5 +177,5 @@ def test_not_enough_variables():
     assert isinstance(l.EFL, sympy.core.expr.Expr)
     assert isinstance(l.BFL, sympy.core.expr.Expr)
     assert isinstance(l.FFL, sympy.core.expr.Expr)
-    assert isinstance(l.NPS, sympy.core.expr.Expr)
+    assert l.NPS == 0
 

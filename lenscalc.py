@@ -101,6 +101,20 @@ class Lens:
             else:
                 equation_index += 1
 
+        # From the equations:
+        # f1 = -n1 * EFL
+        # f2 = n2 * EFL
+        # NPS = f2 + f1
+        # NPS = (n2 * EFL) + (-n1 * EFL)
+        # NPS = EFL * (n2 - n1)
+        # and if n2 == n1 -> n2 - n1 = 0
+        # which means that NPS = EFL * 0
+        # which means that NPS = 0
+        if self.n2 == self.n1:
+            self.NPS = 0
+            self.replacements["NPS"] = 0
+            missing_values.discard(symbols("NPS"))
+
         if not missing_values:
             return
 

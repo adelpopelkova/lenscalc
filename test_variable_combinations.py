@@ -10,53 +10,19 @@ from lenscalc import Lens
 single_variables = combinations(Lens.variables, 1)
 
 pairs = combinations(Lens.variables, 2)
-pairs_failing = [
-    ('f1', 'NPS'),
-    ('f2', 'NPS')
-]
-pairs_passing = [pair for pair in pairs if pair not in pairs_failing]
 
 triplets = combinations(Lens.variables, 3)
 triplets_failing = [
     ('D1', 'D2', 'nL'),  # This one ends up with the ValueError.
-    ('D1', 'f1', 'NPS'),
-    ('D1', 'f2', 'NPS'),
-    ('D2', 'f1', 'NPS'),
-    ('D2', 'f2', 'NPS'),
-    ('D', 'f1', 'NPS'),
-    ('D', 'f2', 'NPS'),
-    ('n1', 'f1', 'NPS'),
-    ('n1', 'f2', 'NPS'),
-    ('nL', 'f1', 'NPS'),
-    ('nL', 'f2', 'NPS'),
-    ('n2', 'f1', 'NPS'),
-    ('n2', 'f2', 'NPS'),
-    ('r1', 'f1', 'NPS'),
-    ('r1', 'f2', 'NPS'),
-    ('r2', 'f1', 'NPS'),
-    ('r2', 'f2', 'NPS'),
-    ('CT', 'f1', 'NPS'),
-    ('CT', 'f2', 'NPS'),
-    ('P1', 'f1', 'NPS'),
-    ('P1', 'f2', 'NPS'),
-    ('P2', 'f1', 'NPS'),
-    ('P2', 'f2', 'NPS'),
-    ('f1', 'EFL', 'NPS'),
-    ('f1', 'FFL', 'NPS'),
-    ('f1', 'BFL', 'NPS'),
-    ('f2', 'EFL', 'NPS'),
-    ('f2', 'FFL', 'NPS'),
-    ('f2', 'BFL', 'NPS')
 ]
 triplets_passing = [triplet for triplet in triplets if triplet not in triplets_failing]
 
 combinations_passing = chain(
     single_variables,
-    pairs_passing,
+    pairs,
     triplets_passing
 )
 combinations_failing = chain(
-    pairs_failing,
     triplets_failing
 )
 
