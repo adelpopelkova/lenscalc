@@ -119,6 +119,8 @@ class Lens:
             return
 
         missing_values = [str(variable) for variable in missing_values]
+        if len(self.equations) > len(missing_values):
+            self.equations = self.equations[:len(missing_values)]
         solved_equations = solve(self.equations, missing_values)
         if isinstance(solved_equations, dict):
             for variable in missing_values:
