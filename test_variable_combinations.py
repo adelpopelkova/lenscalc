@@ -10,11 +10,15 @@ from lenscalc import Lens
 single_variables = combinations(Lens.variables, 1)
 pairs = combinations(Lens.variables, 2)
 triplets = combinations(Lens.variables, 3)
+combinations_of_4 = combinations(Lens.variables, 4)
+combinations_of_5 = combinations(Lens.variables, 5)
 
 combinations_passing = chain(
     single_variables,
     pairs,
-    triplets
+    triplets,
+    combinations_of_4,
+    combinations_of_5
 )
 combinations_failing = chain()
 
