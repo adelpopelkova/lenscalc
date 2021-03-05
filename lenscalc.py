@@ -1,4 +1,4 @@
-from sympy import symbols, Eq
+from sympy import Eq
 from sympy.core.symbol import Symbol
 from sympy.core.expr import Expr
 from sympy.solvers import solve
@@ -8,7 +8,7 @@ class Lens:
     variables = "D1", "D2", "D", "n1", "nL", "n2", "r1", "r2", "CT", "P1", "P2", "f1", "f2", "EFL", "FFL", "BFL", "NPS"
 
     for variable in variables:
-        vars()[variable] = symbols(variable)
+        vars()[variable] = Symbol(variable)
 
     equations = (
         Eq(D1, (nL - n1) / r1),
@@ -27,7 +27,7 @@ class Lens:
     def __init__(self, *, D1=None, D2=None, D=None, n1=None, nL=None, n2=None, r1=None, r2=None, CT=None, P1=None, P2=None, f1=None, f2=None, EFL=None, FFL=None, BFL=None, NPS=None):
         self.parameters = locals()
         del self.parameters["self"]
-    
+
     def __getattribute__(self, name):
         attr = object.__getattribute__(self, name)
 
@@ -54,7 +54,7 @@ class Lens:
         for variable in self.variables:
             if self.parameters[variable] is not None:
                 result[variable] = self.parameters[variable]
-        
+
         return result
 
     def calculate(self):
@@ -64,7 +64,7 @@ class Lens:
         if not self.replacements:
             raise ValueError("No variables were given!")
 
-        missing_values = {symbols(v) for v in self.variables if v not in self.replacements}
+        missing_values = {Symbol(v) for v in self.variables if v not in self.replacements}
         if not missing_values:
             print("Nothing to compute. All variables have their values!")
             return
@@ -113,7 +113,7 @@ class Lens:
         if self.n2 == self.n1:
             self.NPS = 0
             self.replacements["NPS"] = 0
-            missing_values.discard(symbols("NPS"))
+            missing_values.discard(Symbol("NPS"))
 
         if not missing_values:
             return
@@ -124,7 +124,7 @@ class Lens:
         solved_equations = solve(self.equations, missing_values)
         if isinstance(solved_equations, dict):
             for variable in missing_values:
-                setattr(self, variable, solved_equations[symbols(variable)].subs(self.replacements))
+                setattr(self, variable, solved_equations[Symbol(variable)].subs(self.replacements))
             return
 
         if not len(solved_equations):
@@ -135,6 +135,6 @@ class Lens:
 
     def __str__(self):
         return "\n".join(f"{var}: {self.parameters[var]}" for var in self.variables)
-    
+
     def __repr__(self):
         return self.__str__()
