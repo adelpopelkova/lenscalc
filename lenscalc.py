@@ -1,3 +1,5 @@
+from math import isclose  # Due to the floating point inaccuracy
+
 from sympy import Eq
 from sympy.core.symbol import Symbol
 from sympy.core.expr import Expr
@@ -107,10 +109,10 @@ class Lens:
         # NPS = f2 + f1
         # NPS = (n2 * EFL) + (-n1 * EFL)
         # NPS = EFL * (n2 - n1)
-        # and if n2 == n1 -> n2 - n1 = 0
+        # and if n1 == n2 -> n2 - n1 = 0
         # which means that NPS = EFL * 0
         # which means that NPS = 0
-        if self.n2 == self.n1:
+        if self.n1 and self.n2 and isclose(self.n1, self.n2):
             self.NPS = 0
             self.replacements["NPS"] = 0
             missing_values.discard(Symbol("NPS"))
@@ -125,6 +127,8 @@ class Lens:
         if isinstance(solved_equations, dict):
             for variable in missing_values:
                 setattr(self, variable, solved_equations[Symbol(variable)].subs(self.replacements))
+            if isclose(self.n1, self.n2):
+                self.NPS = 0
             return
 
         if not len(solved_equations):
