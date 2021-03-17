@@ -49,3 +49,6 @@ If you don't want to run the tests with the combinations, use this command:
 ```
 $ python -m pytest --ignore=test_variable_combinations.py
 ```
+
+## License
+This project is licensed under the [MIT License](LICENSE).
