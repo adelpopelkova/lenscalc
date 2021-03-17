@@ -31,8 +31,9 @@ lens.CT = 3
 Calculate the lens using the `calculate` method.
 
 ## Using the web app
+The web app currently runs [here](http://adelpopelkova.pythonanywhere.com/).
 
-To run the web app locally, use the following comands.
+To run the web app locally, use the following commands.
 (On Windows use `set` instead of `export`.)
 ```
 $ export FLASK_APP=lenscalc_web
