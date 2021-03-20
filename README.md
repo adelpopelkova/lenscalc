@@ -42,13 +42,19 @@
 ## Using the web app
 The web app currently runs [here](http://adelpopelkova.pythonanywhere.com/).
 
-To run the web app locally, use the following commands.
+To run the web app locally
+1. Create and/or activate a virtual environment.
+1. Install the dependencies using this command:
+    ```
+    $ python -m pip install -r requirements-web.txt
+    ```
+1. Use these commands to run the web app
 (On Windows use `set` instead of `export`.)
-```
-$ export FLASK_APP=lenscalc_web
-$ export FLASK_ENV=development
-$ flask run
-```
+    ```
+    $ export FLASK_APP=lenscalc_web
+    $ export FLASK_ENV=development
+    $ flask run
+    ```
 
 ## Testing the calculator
 Use this command to get also the time of the 5 slowest tests.
