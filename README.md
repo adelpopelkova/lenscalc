@@ -57,14 +57,28 @@ To run the web app locally
     ```
 
 ## Testing the calculator
-Use this command to get also the time of the 5 slowest tests.
-```
-$ python -m pytest -v --durations=5
-```
-If you don't want to run the tests with the combinations, use this command:
-```
-$ python -m pytest --ignore=test_variable_combinations.py
-```
+1. To an activated virtual environment install the dependencies for testing.
+    * You can use this command to install only the necessary dependencies:
+        ```
+        $ python -m pip install -r requirements-dev.txt
+        ```
+    * If you want to install some extra requirements use:
+        ```
+        $ python -m pip install -r requirements-extra.txt
+        ```
+1. Run the tests
+    * The easiest way to run the test is this command:
+        ```
+        $ python -m pytest
+        ```
+    * Use this command to get also the time of the 5 slowest tests.
+        ```
+        $ python -m pytest -v --durations=5
+        ```
+    * If you don't want to run the tests with the combinations, use this command:
+        ```
+        $ python -m pytest --ignore=test_variable_combinations.py
+        ```
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
