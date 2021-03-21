@@ -1,7 +1,5 @@
 # lenscalc
 
-:construction: This README is currently a Work In Progress.
-
 Lenscalc is a more universal version of
 [this](https://www.edmundoptics.com/knowledge-center/tech-tools/focal-length/)
 focal length calculator.
