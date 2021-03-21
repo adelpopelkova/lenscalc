@@ -2,6 +2,7 @@ from math import isclose  # Due to the floating point inaccuracy
 
 from sympy import Eq
 from sympy.core.symbol import Symbol
+from sympy.core.numbers import Float
 from sympy.core.expr import Expr
 from sympy.solvers import solve
 
@@ -135,7 +136,13 @@ class Lens:
             raise ValueError("SymPy doesn't want to calculate this input!")
 
         for variable, solved_equation in zip(missing_values, solved_equations[0]):
-            setattr(self, variable, solved_equation.subs(self.replacements))
+            value = solved_equation.subs(self.replacements)
+            # The type of some values is sympy.core.add.Add
+            # or sympy.core.mul.Mul, the value isn't a number.
+            # This makes sure that we get the result as a number.
+            if not isinstance(value, Float):
+                value = value.n()
+            setattr(self, variable, value)
 
     def __str__(self):
         return "\n".join(f"{var}: {self.parameters[var]}" for var in self.variables)
