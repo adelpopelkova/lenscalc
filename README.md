@@ -2,6 +2,10 @@
 
 :construction: This README is currently a Work In Progress.
 
+Lenscalc is a more universal version of
+[this](https://www.edmundoptics.com/knowledge-center/tech-tools/focal-length/)
+focal length calculator.
+
 ## How to use the calculator
 1. Download or clone the repository.
 1. Create and/or activate a virtual environment.
