@@ -15,7 +15,9 @@ def result(variables=None, values=None):
     replacements = {}
     for arg in flask.request.args:
         if flask.request.args[arg] != "":
-            replacements[arg] = flask.request.args[arg]
+            # The type of the value from the web app is a string.
+            # It is converted to float before it is passed to lenscalc.
+            replacements[arg] = float(flask.request.args[arg])
 
     lens = Lens(**replacements)
     lens.calculate()
@@ -23,4 +25,3 @@ def result(variables=None, values=None):
     values = lens.__dict__["parameters"]
 
     return flask.render_template("result.html", variables=Lens.variables, values=values)
-
