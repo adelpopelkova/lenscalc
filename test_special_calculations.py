@@ -1,4 +1,5 @@
 from math import isclose
+from sympy.core.symbol import Symbol
 
 from lenscalc import Lens
 
@@ -39,3 +40,19 @@ def test_different_refractive_index():
     assert isclose(lens.NPS, 23.2854588912774)
 
     assert lens.NPS != 0
+
+
+def test_extra_symbol():
+    """
+    Test lens with an extra attribute of Symbol type.
+    """
+    lens = Lens()
+
+    extra = Symbol("extra")
+
+    # Set the arttribute.
+    lens.extra = extra
+    # Try to get the value of the attribute.
+    extra_attribute = lens.extra
+
+    assert extra_attribute == extra

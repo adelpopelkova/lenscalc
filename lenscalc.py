@@ -34,11 +34,8 @@ class Lens:
     def __getattribute__(self, name):
         attr = object.__getattribute__(self, name)
 
-        if isinstance(attr, Symbol):
-            try:
-                return self.parameters[name]
-            except KeyError:
-                raise AttributeError
+        if name in object.__getattribute__(self, "parameters"):
+            return self.parameters[name]
         else:
             return attr
 
