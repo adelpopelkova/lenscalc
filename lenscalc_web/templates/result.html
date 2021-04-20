@@ -11,25 +11,17 @@
 
         <h1>Result is...</h1>
 
-        <ul>
-
             {% for variable in variables %}
                 {% if variable in values %}
 
-                    <li>
-                        {{variable}} = {{values[variable]}}
-                    </li>
+                    {{variable}} = {{values[variable]}} <br>
 
                 {% else %}
 
-                    <li>
-                        {{variable}} = None
-                    </li>
+                    {{variable}} = None <br>
 
                 {% endif %}
             {% endfor %}
-
-        </ul>
 
     </body>
 
