@@ -15,8 +15,10 @@
 
             {% for variable in variables %}
 
-                <label for="{{variable}}">{{variable}} </label>
-                <input type="number" step="any" id="{{variable}}" name="{{variable}}"><br>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">{{variable}}</span>
+                    <input type="number" step="any" name="{{variable}}" class="form-control" placeholder="{{variable}}"><br>
+                </div>
 
             {% endfor %}
 
