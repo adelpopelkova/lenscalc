@@ -9,7 +9,9 @@
 
     <body>
 
-        <h1>Result is...</h1>
+        <div class="container my-5">
+
+            <h1>Result is...</h1>
 
             {% for variable in variables %}
                 {% if variable in values %}
@@ -22,6 +24,8 @@
 
                 {% endif %}
             {% endfor %}
+
+        </div>
 
     </body>
 
