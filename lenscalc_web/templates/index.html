@@ -16,9 +16,17 @@
 
                 {% for variable in variables %}
 
-                    <div class="input-group input-group-sm mb-3">
-                        <label for="{{variable}}" class="input-group-text">{{variable}}</label>
-                        <input type="number" step="any" name="{{variable}}" id="{{variable}}" class="form-control" placeholder="{{variable}}">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm mb-3 font-monospace">
+                                <label for="{{ variable }}" class="input-group-text">{{ variables[variable].HTML|safe }}</label>
+                                <input type="number" step="any" name="{{ variable }}" id="{{ variable }}" class="form-control" placeholder="{{ variables[variable].placeholder }}">
+                                {% if variables[variable].unit %}
+                                    <span class="input-group-text">{{ variables[variable].unit }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col">{{ variables[variable].description }}</div>
                     </div>
 
                 {% endfor %}
