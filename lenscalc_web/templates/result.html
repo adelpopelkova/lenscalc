@@ -16,11 +16,11 @@
             {% for variable in variables %}
                 {% if variable in values %}
 
-                    {{variable}} = {{values[variable]}} <br>
+                    {{ variables[variable].HTML|safe }} = {{ values[variable] }} {{ variables[variable].unit }}<br>
 
                 {% else %}
 
-                    {{variable}} = None <br>
+                    {{ variables[variable].HTML|safe }} = None <br>
 
                 {% endif %}
             {% endfor %}
