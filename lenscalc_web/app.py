@@ -43,7 +43,10 @@ def result(variables=None, values=None):
             variables_info[arg]["value"] = float(flask.request.args[arg])
 
     lens = Lens(**values_from_input)
-    lens.calculate()
+    try:
+        lens.calculate()
+    except ValueError:
+        return flask.render_template("index.html", variables=variables_info)
 
     calculated_values = lens.__dict__["parameters"]
 
