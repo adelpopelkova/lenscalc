@@ -34,16 +34,17 @@ def index():
 
 @app.route("/result/")
 def result(variables=None, values=None):
-    replacements = {}
+    values_from_input = {}
     for arg in flask.request.args:
         if flask.request.args[arg] != "":
             # The type of the value from the web app is a string.
             # It is converted to float before it is passed to lenscalc.
-            replacements[arg] = float(flask.request.args[arg])
+            values_from_input[arg] = float(flask.request.args[arg])
+            variables_info[arg]["value"] = float(flask.request.args[arg])
 
-    lens = Lens(**replacements)
+    lens = Lens(**values_from_input)
     lens.calculate()
 
-    values = lens.__dict__["parameters"]
+    calculated_values = lens.__dict__["parameters"]
 
-    return flask.render_template("result.html", variables=variables_info, values=values)
+    return flask.render_template("result.html", variables=variables_info, calculated=calculated_values)
