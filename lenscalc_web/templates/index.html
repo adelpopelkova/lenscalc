@@ -11,34 +11,39 @@
     <body>
 
         <div class="container my-5 lenscalc-container">
-            <h1>Lens calculator</h1>
+            <header>
+                <h1>Lens calculator</h1>
 
-            <p>Lenscalc is a more universal version of <a href="https://www.edmundoptics.com/knowledge-center/tech-tools/focal-length/">Edmund Optics' Focal Length Calculator</a>.</p>
+                <p>Lenscalc is a more universal version of <a href="https://www.edmundoptics.com/knowledge-center/tech-tools/focal-length/">Edmund Optics' Focal Length Calculator</a>.</p>
 
-            <p>Unlike the original version, lenscalc gives you the option to enter any set of parameters. Now you don't have to slightly adjust the <em>surface radius</em> to get your desired <em>back focal length</em>, you can just type it in. In the background there are the exact same equations.</p>
+                <p>Unlike the original version, lenscalc gives you the option to enter any set of parameters. Now you don't have to slightly adjust the <em>surface radius</em> to get your desired <em>back focal length</em>, you can just type it in. In the background there are the exact same equations.</p>
+            </header>
 
-            <form action="{{ url_for('result') }}" method="GET">
+            <main>
+                <form action="{{ url_for('result') }}" method="GET">
 
-                {% for variable in variables %}
+                    {% for variable in variables %}
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-sm mb-3 font-monospace">
-                                <label for="{{ variable }}" class="input-group-text">{{ variables[variable].HTML|safe }}</label>
-                                <input type="number" step="any" name="{{ variable }}" id="{{ variable }}" class="form-control" placeholder="{{ variables[variable].placeholder }}" value="{{ variables[variable].value }}">
-                                {% if variables[variable].unit %}
-                                    <span class="input-group-text">{{ variables[variable].unit }}</span>
-                                {% endif %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mb-3 font-monospace">
+                                    <label for="{{ variable }}" class="input-group-text">{{ variables[variable].HTML|safe }}</label>
+                                    <input type="number" step="any" name="{{ variable }}" id="{{ variable }}" class="form-control" placeholder="{{ variables[variable].placeholder }}" value="{{ variables[variable].value }}">
+                                    {% if variables[variable].unit %}
+                                        <span class="input-group-text">{{ variables[variable].unit }}</span>
+                                    {% endif %}
+                                </div>
                             </div>
+                            <div class="col">{{ variables[variable].description }}</div>
                         </div>
-                        <div class="col">{{ variables[variable].description }}</div>
-                    </div>
 
-                {% endfor %}
+                    {% endfor %}
 
-                <button type="submit" class="btn btn-primary">Calculate!</button>
+                    <button type="submit" class="btn btn-primary">Calculate!</button>
 
-            </form>
+                </form>
+
+            </main>
 
         </div>
 
