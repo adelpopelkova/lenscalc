@@ -36,19 +36,26 @@
 
             </form>
 
-            <h2>Result is...</h2>
-
-            {% for variable in variables %}
-                {% if variable in calculated %}
-
-                    {{ variables[variable].HTML|safe }} = {{ calculated[variable] }} {{ variables[variable].unit }}<br>
-
-                {% else %}
-
-                    {{ variables[variable].HTML|safe }} = None <br>
-
-                {% endif %}
-            {% endfor %}
+            <section class="mt-4" id="#result">
+                <h2>Result is...</h2>
+                <table class="table">
+                    <tbody>
+                        {% for variable in variables %}
+                            {% if variable in calculated %}
+                                <tr>
+                                    <td>{{ variables[variable].HTML|safe }}</td>
+                                    <td>{{ calculated[variable] }} {{ variables[variable].unit }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>{{ variables[variable].HTML|safe }}</td>
+                                    <td>None</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
 
         </div>
 
