@@ -55,6 +55,7 @@ To run the web app locally
     ```
     $ export FLASK_APP=lenscalc_web
     $ export FLASK_ENV=development
+    $ export FLASK_DEBUG=1
     $ flask run
     ```
 
