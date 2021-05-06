@@ -1,0 +1,8 @@
+.lenscalc-container {
+    max-width: 40rem;
+}
+
+label.input-group-text {
+    min-width: calc(3ch + 2 * 0.75rem + 2 * 1px);
+    justify-content: center;
+}
