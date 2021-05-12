@@ -64,7 +64,7 @@ class Lens:
         if not self.replacements:
             raise ValueError("No variables were given!")
 
-        missing_values = {Symbol(v) for v in self.variables if v not in self.replacements}
+        missing_values = [Symbol(v) for v in self.variables if v not in self.replacements]
         if not missing_values:
             print("Nothing to compute. All variables have their values!")
             return
@@ -75,13 +75,13 @@ class Lens:
         equation_index = 0
         while missing_values and equation_index < len(self.equations):
             equation = self.equations[equation_index]
-            common = missing_values & equation.free_symbols
+            common = set(missing_values) & equation.free_symbols
 
             if not common:
                 self.equations.remove(equation)
 
             elif len(common) == 1:
-                variable = list(common)[0]
+                variable = common.pop()
                 solved_equation = solve(equation, variable)
 
                 if isinstance(solved_equation, list):
@@ -113,7 +113,8 @@ class Lens:
         if self.n1 and self.n2 and isclose(self.n1, self.n2):
             self.NPS = 0
             self.replacements["NPS"] = 0
-            missing_values.discard(Symbol("NPS"))
+            if Symbol("NPS") in missing_values:
+                missing_values.remove(Symbol("NPS"))
 
         if not missing_values:
             return
