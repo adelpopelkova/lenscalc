@@ -5,6 +5,44 @@ import pytest
 from lenscalc import Lens
 from combinations_for_tests import combinations_passing, combinations_failing
 
+ORIGINAL_LENS = Lens(
+    D1=0.00999400000000000,
+    D2=0.0124925000000000,
+    D=0.0222367999100000,
+    n1=1.0003,
+    nL=1.5,
+    n2=1.0003,
+    r1=50,
+    r2=-40,
+    CT=3,
+    P1=1.12392500724714,
+    P2=-0.899140005797714,
+    f1=-44.9839906842963,
+    f2=44.9839906842963,
+    EFL=44.9704995344359,
+    FFL=-43.8600656770491,
+    BFL=44.0848506784985,
+    NPS=0
+)
+
+
+def compare_two_lenses(lens1, lens2):
+    """
+    Compare two lenses.
+
+    Return True if they are the same / close enough.
+    Return False if they aren't close enough and print the differences.
+    """
+    same = True
+    for variable in Lens.variables:
+        value_lens1 = getattr(lens1, variable)
+        value_lens2 = getattr(lens2, variable)
+        if not isclose(value_lens1, value_lens2):
+            same = False
+            print(f"{variable}: {value_lens1}, {value_lens2}")
+
+    return same
+
 
 @pytest.mark.parametrize("left_out", combinations_passing)
 def test_missing_passing(left_out):
@@ -30,17 +68,12 @@ def test_missing_passing(left_out):
     lens.BFL = 44.0848506784985
     lens.NPS = 0
 
-    removed = {}
     for variable in left_out:
-        removed[variable] = getattr(lens, variable)
         setattr(lens, variable, None)
 
     lens.calculate()
-    for variable in left_out:
-        print(variable)
-        print(removed[variable])
-        print(getattr(lens, variable))
-        assert isclose(removed[variable], getattr(lens, variable))
+
+    assert compare_two_lenses(ORIGINAL_LENS, lens)
 
 
 @pytest.mark.parametrize("left_out", combinations_failing)
