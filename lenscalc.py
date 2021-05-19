@@ -124,9 +124,12 @@ class Lens:
             self.equations = self.equations[:len(missing_values)]
         solved_equations = solve(self.equations, missing_values)
         if isinstance(solved_equations, dict):
+            if len(solved_equations) < len(missing_values):
+                solved_equations[Symbol("NPS")] = Symbol("NPS")
             for variable in missing_values:
                 setattr(self, variable, solved_equations[Symbol(variable)].subs(self.replacements))
-            if isclose(self.n1, self.n2):
+            numbers = (int, float, Float)  # Classes with numbers
+            if isinstance(self.n1, numbers) and isinstance(self.n2, numbers) and isclose(self.n1, self.n2):
                 self.NPS = 0
             return
 
