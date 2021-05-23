@@ -48,6 +48,6 @@ def result(variables=None, values=None):
     except ValueError:
         return flask.render_template("index.html", variables=variables_info)
 
-    calculated_values = lens.__dict__["parameters"]
+    calculated_values = lens.parameters
 
     return flask.render_template("result.html", variables=variables_info, calculated=calculated_values)
