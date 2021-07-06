@@ -143,5 +143,11 @@ or `print(lens.BFL)` and similar to get them one by one.
         $ python -m pytest -n <Number of CPUs>
         ```
 
+## Found a bug?
+
+Have you found something that doesn't work as expected? Don't hesitate to open
+an [issue](https://github.com/adelpopelkova/lenscalc/issues/new)
+or send a Pull Request!
+
 ## License
 This project is licensed under the [MIT License](LICENSE).
