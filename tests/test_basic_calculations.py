@@ -116,7 +116,7 @@ def test_calculate_with_all_variables(capsys):
     """
     l = Lens()
     l.D1 = 0.00999400000000000
-    l.D2 =  0.0124925000000000
+    l.D2 = 0.0124925000000000
     l.D = 0.0222367999100000
     l.n1 = 1.0003
     l.nL = 1.5
