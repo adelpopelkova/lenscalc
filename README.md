@@ -1,8 +1,13 @@
 # lenscalc
 
 Lenscalc is a more universal version of
-[this](https://www.edmundoptics.com/knowledge-center/tech-tools/focal-length/)
-focal length calculator.
+[Edmund Optics' Focal Length Calculator](https://www.edmundoptics.com/knowledge-center/tech-tools/focal-length/).
+
+Unlike the original version,
+lenscalc gives you the option to enter any set of parameters.
+Now you don't have to slightly adjust the *surface radius* to get your
+desired *back focal length*, you can just type it in.
+In the background there are the exact same equations.
 
 ## How to use the calculator
 1. Download or clone the repository.
