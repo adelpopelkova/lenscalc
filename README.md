@@ -9,6 +9,41 @@ Now you don't have to slightly adjust the *surface radius* to get your
 desired *back focal length*, you can just type it in.
 In the background there are the exact same equations.
 
+## Lens variables
+
+The variables used to define the lens are the same as in the original calculator.
+Some of them have been renamed to be easier to type
+(e.g. Φ<sub>OS</sub> → D<sub>1</sub>).
+Only the variables that have been renamed have all three columns filled in.
+
+Lenscalc name | Original name  | Description
+:-----------: | :------------: | --------------------------
+D<sub>1</sub> | Φ<sub>OS</sub> | Surface 1 (object) power
+D<sub>2</sub> | Φ<sub>IS</sub> | Surface 2 (image) power
+D             | Φ              | Lens power
+n<sub>1</sub> | n<sub>OS</sub> | Object space index
+n<sub>L</sub> |                | Lens index
+n<sub>2</sub> | n<sub>IS</sub> | Image space index
+r<sub>1</sub> | R<sub>1</sub>  | Surface 1 (object) radius
+r<sub>2</sub> | R<sub>2</sub>  | Surface 2 (image) radius
+CT            |                | Central thickness
+P<sub>1</sub> | P              | Primary principle point
+P<sub>2</sub> | P"             | Secondary principle point
+f<sub>1</sub> | f<sub>F</sub>  | Front (object) focal point
+f<sub>2</sub> | f<sub>R</sub>  | Back (image) focal point
+EFL           |                | Effective focal length
+FFL           |                | Front focal length
+BFL           |                | Back focal length
+NPS           |                | Shift in nodal point
+
+If you are using lenscalc in your code (i.e. you aren't using the web version),
+the variables have the same name, they are just written without the subscript,
+(e.g. D<sub>1</sub> → `D1`).
+
+All variables except refractive indexes
+(n<sub>1</sub>, n<sub>L</sub>, n<sub>2</sub>)
+have the same unit (usually mm or cm).
+
 ## How to use the calculator
 1. Download or clone the repository.
 1. Create and/or activate a virtual environment.
