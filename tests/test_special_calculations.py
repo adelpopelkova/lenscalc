@@ -1,4 +1,5 @@
 from math import isclose
+
 from sympy.core.symbol import Symbol
 
 from lenscalc import Lens
