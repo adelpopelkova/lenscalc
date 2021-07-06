@@ -45,13 +45,26 @@ All variables except refractive indexes
 have the same unit (usually mm or cm).
 
 ## How to use the calculator
+
+There are a few ways how you can use the calculator.
+
+### Using the web version
+
+The web app currently runs [here](http://adelpopelkova.pythonanywhere.com/).
+
+### Using it in your Python code
+
 1. Download or clone the repository.
 1. Create and/or activate a virtual environment.
+(Optional, although highly recommended).
 1. Install needed dependencies using this command:
     ```
     $ python -m pip install -r requirements.txt
     ```
 1. Import the Lens class.
+    ```python
+    from lenscalc import Lens
+    ```
 1. Using one of these two ways create a lens:
     ```python
     # The first one
@@ -79,12 +92,10 @@ have the same unit (usually mm or cm).
     lens.calculate()
     ```
 1. To get the calculated variables use `print(lens)` for all variables
-   or `print(lens.BFL)` and similar to get them one by one.
+or `print(lens.BFL)` and similar to get them one by one.
 
-## Using the web app
-The web app currently runs [here](http://adelpopelkova.pythonanywhere.com/).
+### Using the web app locally
 
-To run the web app locally
 1. Create and/or activate a virtual environment.
 1. Install the dependencies using this command:
     ```
@@ -101,11 +112,11 @@ To run the web app locally
 
 ## Testing the calculator
 1. To an activated virtual environment install the dependencies for testing.
-    * You can use this command to install only the necessary dependencies:
+    * You can use this command to install only the necessary ones:
         ```
         $ python -m pip install -r requirements-dev.txt
         ```
-    * If you want to install some extra requirements use:
+    * If you want to install some extra tools (for easier development) use:
         ```
         $ python -m pip install -r requirements-extra.txt
         ```
@@ -118,9 +129,18 @@ To run the web app locally
         ```
         $ python -m pytest -v --durations=5
         ```
-    * If you don't want to run the tests with the combinations, use this command:
+    * If you don't want to run the tests with the combinations
+    (there are a lot of them and they take a bit longer to run),
+    use this command:
         ```
         $ python -m pytest --ignore=test_variable_combinations.py
+        ```
+    * To run the tests with combinations faster, you can use the following
+    command (you'll need to install extra requirements or only
+    [pytest-xdist](https://pypi.org/project/pytest-xdist/)
+    for this command to work) to run the tests in parallel:
+        ```
+        $ python -m pytest -n <Number of CPUs>
         ```
 
 ## License
