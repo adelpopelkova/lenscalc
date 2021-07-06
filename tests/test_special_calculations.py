@@ -11,12 +11,12 @@ def test_different_refractive_index():
     And check that NPS isn't 0.
     """
     lens = Lens(
-        n1 = 1.0003,  # air
-        nL = 1.5,
-        n2 = 1.33,  # water
-        r1 = 50,
-        r2 = -40,
-        CT = 3
+        n1=1.0003,  # air
+        nL=1.5,
+        n2=1.33,  # water
+        r1=50,
+        r2=-40,
+        CT=3
     )
 
     lens.calculate()

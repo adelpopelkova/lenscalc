@@ -11,12 +11,12 @@ def test_setup():
     Test one option how to create a lens.
     """
     l = Lens(
-        n1 = 1.0003,
-        nL = 1.5,
-        n2 = 1.0003,
-        r1 = 50,
-        r2 = -40,
-        CT = 3
+        n1=1.0003,
+        nL=1.5,
+        n2=1.0003,
+        r1=50,
+        r2=-40,
+        CT=3
     )
 
     l.calculate()
@@ -48,12 +48,12 @@ def test_variables_before_calculation():
     Test variables before calculation.
     """
     l = Lens(
-        n1 = 1.0003,
-        nL = 1.5,
-        n2 = 1.0003,
-        r1 = 50,
-        r2 = -40,
-        CT = 3
+        n1=1.0003,
+        nL=1.5,
+        n2=1.0003,
+        r1=50,
+        r2=-40,
+        CT=3
     )
 
     assert l.n1 == 1.0003
