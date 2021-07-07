@@ -113,4 +113,5 @@ def test_missing_failing(left_out):
 
     with pytest.raises(ValueError) as exception_info:
         lens.calculate()
-    assert str(exception_info.value) == "SymPy doesn't want to calculate this input!"
+
+    assert str(exception_info.value).startswith("There has been a problem with the calculation.")
