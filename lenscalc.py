@@ -134,7 +134,13 @@ class Lens:
             return
 
         if not len(solved_equations):
-            raise ValueError("SymPy doesn't want to calculate this input!")
+            error_message = (
+                "There has been a problem with the calculation.\n"
+                "If you think, that this should return a propper result,"
+                "don't hesitate to open an issue at "
+                "https://github.com/adelpopelkova/lenscalc/"
+            )
+            raise ValueError(error_message)
 
         for variable, solved_equation in zip(missing_values, solved_equations[0]):
             value = solved_equation.subs(self.replacements)
