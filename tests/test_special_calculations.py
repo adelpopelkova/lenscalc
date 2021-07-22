@@ -1,10 +1,12 @@
 from math import isclose
+from decimal import Decimal
 
+import pytest
 from sympy import oo  # infinity in SymPy
 from sympy.core.symbol import Symbol
 
 from lenscalc import Lens
-from test_variable_combinations import compare_two_lenses
+from test_variable_combinations import compare_two_lenses, ORIGINAL_LENS
 
 
 def test_different_refractive_index():
@@ -99,3 +101,49 @@ def test_planar_surface_lens():
     )
 
     assert compare_two_lenses(comparison_lens, lens)
+
+
+def test_lens_decimal_input():
+    """
+    Test lens with input of type Decimal.
+
+    Only checking whether the result is correct.
+    """
+    lens = Lens(
+        n1=Decimal("1.0003"),
+        nL=Decimal("1.5"),
+        n2=Decimal("1.0003"),
+        r1=Decimal("50"),
+        r2=Decimal("-40"),
+        CT=Decimal("3")
+    )
+
+    lens.calculate()
+
+    assert compare_two_lenses(ORIGINAL_LENS, lens)
+
+
+@pytest.mark.skip("https://github.com/sympy/sympy/issues/17648")
+def test_lens_decimal_output():
+    """
+    Test lens with input of type Decimal.
+
+    Only checking whether the result is in Decimal type.
+    Correct result is checked in the previous test.
+    At the moment skipped, because `sympy.solve` doesn't return the
+    result in Decimal type.
+    Once the issue is solved, this test will be merged with
+    the previous one.
+    """
+    lens = Lens(
+        n1=Decimal("1.0003"),
+        nL=Decimal("1.5"),
+        n2=Decimal("1.0003"),
+        r1=Decimal("50"),
+        r2=Decimal("-40"),
+        CT=Decimal("3")
+    )
+
+    lens.calculate()
+
+    assert isinstance(lens.f1, Decimal)

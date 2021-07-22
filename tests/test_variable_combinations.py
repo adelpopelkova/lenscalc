@@ -1,4 +1,5 @@
 from math import isclose
+from decimal import Decimal
 
 import pytest
 from sympy.core.expr import Expr
@@ -37,7 +38,7 @@ def compare_two_lenses(lens1, lens2):
     Return False if they aren't close enough and print the differences.
     """
     same = True
-    numbers = (int, float, Float, Zero, Infinity)  # Classes with numbers
+    numbers = (int, float, Float, Decimal, Zero, Infinity)  # Classes with numbers
     for variable in Lens.variables:
         value_lens1 = getattr(lens1, variable)
         value_lens2 = getattr(lens2, variable)
