@@ -4,6 +4,7 @@ from decimal import Decimal
 import pytest
 from sympy import oo  # infinity in SymPy
 from sympy.core.symbol import Symbol
+from sympy.core.numbers import Rational
 
 from lenscalc import Lens
 from test_variable_combinations import compare_two_lenses, ORIGINAL_LENS
@@ -147,3 +148,24 @@ def test_lens_decimal_output():
     lens.calculate()
 
     assert isinstance(lens.f1, Decimal)
+
+
+def test_lens_rational():
+    """
+    Test lens with input of type Rational.
+
+    The calculations should be exact, but the result has a weird form.
+    """
+    lens = Lens(
+        n1=Rational("1.0003"),
+        nL=Rational("1.5"),
+        n2=Rational("1.0003"),
+        r1=Rational("50"),
+        r2=Rational("-40"),
+        CT=Rational("3")
+    )
+
+    lens.calculate()
+
+    assert compare_two_lenses(ORIGINAL_LENS, lens)
+    assert isinstance(lens.f1, Rational)
