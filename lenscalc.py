@@ -1,13 +1,15 @@
 from math import isclose  # Due to the floating point inaccuracy
+from decimal import Decimal
 
 from sympy import Eq
 from sympy.core.symbol import Symbol
-from sympy.core.numbers import Float
+from sympy.core.numbers import Float, Rational, Zero, Infinity
 from sympy.core.expr import Expr
 from sympy.solvers import solve
 
 
 class Lens:
+    numbers = int, float, Float, Rational, Decimal, Zero, Infinity  # Classes with numbers
     variables = "D1", "D2", "D", "n1", "nL", "n2", "r1", "r2", "CT", "P1", "P2", "f1", "f2", "EFL", "FFL", "BFL", "NPS"
 
     for variable in variables:
@@ -128,8 +130,7 @@ class Lens:
                 solved_equations[Symbol("NPS")] = Symbol("NPS")
             for variable in missing_values:
                 setattr(self, variable, solved_equations[Symbol(variable)].subs(self.replacements))
-            numbers = (int, float, Float)  # Classes with numbers
-            if isinstance(self.n1, numbers) and isinstance(self.n2, numbers) and isclose(self.n1, self.n2):
+            if isinstance(self.n1, Lens.numbers) and isinstance(self.n2, Lens.numbers) and isclose(self.n1, self.n2):
                 self.NPS = 0
             return
 
