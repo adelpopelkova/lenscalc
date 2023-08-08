@@ -22,6 +22,7 @@ def test_different_refractive_index():
 
     lens.calculate()
 
+    # This lens was compared to the result from the original calculator.
     assert isclose(lens.D1, 0.00999400000000000)
     assert isclose(lens.D2, 0.00425000000000000)
     assert isclose(lens.D, 0.0141590510000000)

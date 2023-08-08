@@ -7,6 +7,7 @@ from sympy.core.numbers import Float, Zero
 from lenscalc import Lens
 from combinations_for_tests import combinations_passing, combinations_failing
 
+# This lens was compared to the result from the original calculator.
 ORIGINAL_LENS = Lens(
     D1=0.00999400000000000,
     D2=0.0124925000000000,
