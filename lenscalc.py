@@ -32,6 +32,9 @@ class Lens:
     def __init__(self, *, D1=None, D2=None, D=None, n1=None, nL=None, n2=None, r1=None, r2=None, CT=None, P1=None, P2=None, f1=None, f2=None, EFL=None, FFL=None, BFL=None, NPS=None):
         self.parameters = locals()
         del self.parameters["self"]
+        for variable, value in self.parameters.items():
+            if isinstance(value, str):
+                setattr(self, variable, value)
 
     def __getattribute__(self, name):
         attr = object.__getattribute__(self, name)
@@ -44,6 +47,8 @@ class Lens:
     def __setattr__(self, name, value):
         try:
             if name in self.parameters:
+                if isinstance(value, str):
+                    value = float(value)
                 self.parameters[name] = value
                 return
         except AttributeError:
