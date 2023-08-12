@@ -28,24 +28,27 @@ def test_different_refractive_index():
     lens.calculate()
 
     # This lens was compared to the result from the original calculator.
-    assert isclose(lens.D1, 0.00999400000000000)
-    assert isclose(lens.D2, 0.00425000000000000)
-    assert isclose(lens.D, 0.0141590510000000)
-    assert isclose(lens.n1, 1.0003)
-    assert isclose(lens.nL, 1.5)
-    assert isclose(lens.n2, 1.33)
-    assert isclose(lens.r1, 50)
-    assert isclose(lens.r2, -40)
-    assert isclose(lens.CT, 3)
-    assert isclose(lens.P1, 0.600502816184503)
-    assert isclose(lens.P2, -1.87752978642425)
-    assert isclose(lens.f1, -70.6473901393533)
-    assert isclose(lens.f2, 93.9328490306307)
-    assert isclose(lens.EFL, 70.6262022786697)
-    assert isclose(lens.FFL, -70.0468873231688)
-    assert isclose(lens.BFL, 92.0553192442064)
-    assert isclose(lens.NPS, 23.2854588912774)
+    comparison_lens = Lens(
+        D1=0.00999400000000000,
+        D2=0.00425000000000000,
+        D=0.0141590510000000,
+        n1=1.0003,
+        nL=1.5,
+        n2=1.33,
+        r1=50,
+        r2=-40,
+        CT=3,
+        P1=0.600502816184503,
+        P2=-1.87752978642425,
+        f1=-70.6473901393533,
+        f2=93.9328490306307,
+        EFL=70.6262022786697,
+        FFL=-70.0468873231688,
+        BFL=92.0553192442064,
+        NPS=23.2854588912774
+    )
 
+    assert compare_two_lenses(comparison_lens, lens)
     assert lens.NPS != 0
 
 
