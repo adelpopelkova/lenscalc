@@ -131,9 +131,11 @@ or `print(lens.BFL)` and similar to get them one by one.
         ```
     * If you don't want to run the tests with the combinations
     (there are a lot of them and they take a bit longer to run),
-    use this command:
+    use the following command (after the `ignore` switch, use the path
+    to the `test_variable_combinations.py` file).
+    Example for running the tests from the root of the repository.
         ```
-        $ python -m pytest --ignore=test_variable_combinations.py
+        $ python -m pytest --ignore=tests/test_variable_combinations.py
         ```
     * To run the tests with combinations faster, you can use the following
     command (you'll need to install extra requirements or only
