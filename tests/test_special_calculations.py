@@ -169,3 +169,63 @@ def test_lens_rational():
 
     assert compare_two_lenses(ORIGINAL_LENS, lens)
     assert isinstance(lens.f1, Rational)
+
+
+def test_variables_as_string():
+    """
+    Test a calculation where some variables are given as a string.
+
+    This is a thing that SymPy allows.
+    At the moment, the user isn't limited to do so.
+    When a variable is given as a string type, it is converted
+    to float type to prevent issues with the calculation.
+    """
+    lens = Lens(
+        D1="0.009994",
+        D2="0.0124925",
+        D="0.02223679991",
+        CT="3",
+        P1="1.12392500724714",
+        P2="-0.899140005797714"
+    )
+
+    lens.calculate()
+
+    assert compare_two_lenses(ORIGINAL_LENS, lens)
+
+
+def test_n1_as_string():
+    """
+    Test a calculation where n1 is given as a string.
+    """
+    lens = Lens(
+        n1="1.0003",
+        nL=1.5,
+        n2=1.0003,
+        r1=50,
+        r2=-40,
+        CT=3
+    )
+
+    lens.calculate()
+
+    assert compare_two_lenses(ORIGINAL_LENS, lens)
+
+
+def test_n1_as_string_added():
+    """
+    Test a calculation where n1 is given as a string later.
+    """
+    lens = Lens(
+        nL=1.5,
+        n2=1.0003,
+        r1=50,
+        r2=-40,
+        CT=3
+    )
+
+    lens.n1 = "1.0003"
+
+    lens.calculate()
+
+    assert compare_two_lenses(ORIGINAL_LENS, lens)
