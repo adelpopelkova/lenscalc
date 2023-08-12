@@ -1,8 +1,10 @@
 from math import isclose
 
+from sympy import oo  # infinity in SymPy
 from sympy.core.symbol import Symbol
 
 from lenscalc import Lens
+from test_variable_combinations import compare_two_lenses
 
 
 def test_different_refractive_index():
@@ -58,3 +60,42 @@ def test_extra_symbol():
     extra_attribute = lens.extra
 
     assert extra_attribute == extra
+
+
+def test_planar_surface_lens():
+    """
+    Test a lens with one surface as infinity.
+    """
+    lens = Lens(
+        n1=1.0003,
+        nL=1.5,
+        n2=1.0003,
+        r1=oo,
+        r2=-40,
+        CT=3
+    )
+
+    lens.calculate()
+
+    # This lens was compared to the result from the original calculator.
+    comparison_lens = Lens(
+        D1=0,
+        D2=0.0124925000000000,
+        D=0.0124925000000000,
+        n1=1.0003,
+        nL=1.5,
+        n2=1.0003,
+        r1=oo,
+        r2=-40,
+        CT=3,
+        P1=2.00060000000000,
+        P2=0,
+        f1=-80.0720432259355,
+        f2=80.0720432259355,
+        EFL=80.0480288172904,
+        FFL=-78.0714432259355,
+        BFL=80.0720432259355,
+        NPS=0
+    )
+
+    assert compare_two_lenses(comparison_lens, lens)
