@@ -30,37 +30,20 @@ class Lens:
     )
 
     def __init__(self, *, D1=None, D2=None, D=None, n1=None, nL=None, n2=None, r1=None, r2=None, CT=None, P1=None, P2=None, f1=None, f2=None, EFL=None, FFL=None, BFL=None, NPS=None):
-        self.parameters = locals()
-        del self.parameters["self"]
-        for variable, value in self.parameters.items():
-            if isinstance(value, str):
+        for variable, value in locals().items():
+            if variable in self.variables:
                 setattr(self, variable, value)
 
-    def __getattribute__(self, name):
-        attr = object.__getattribute__(self, name)
-
-        if name in object.__getattribute__(self, "parameters"):
-            return self.parameters[name]
-        else:
-            return attr
-
     def __setattr__(self, name, value):
-        try:
-            if name in self.parameters:
-                if isinstance(value, str):
-                    value = float(value)
-                self.parameters[name] = value
-                return
-        except AttributeError:
-            object.__setattr__(self, name, value)
-        else:
-            object.__setattr__(self, name, value)
+        if isinstance(value, str) and (name in self.variables):
+            value = float(value)
+        object.__setattr__(self, name, value)
 
     def _calculate_replacements(self):
         result = {}
         for variable in self.variables:
-            if self.parameters[variable] is not None:
-                result[variable] = self.parameters[variable]
+            if (value := getattr(self, variable)) is not None:
+                result[variable] = value
 
         return result
 
@@ -158,7 +141,7 @@ class Lens:
             setattr(self, variable, value)
 
     def __str__(self):
-        return "\n".join(f"{var}: {self.parameters[var]}" for var in self.variables)
+        return "\n".join(f"{var}: {getattr(self, var)}" for var in self.variables)
 
     def __repr__(self):
         return self.__str__()
