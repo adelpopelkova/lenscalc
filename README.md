@@ -44,6 +44,10 @@ All variables except refractive indexes
 (n<sub>1</sub>, n<sub>L</sub>, n<sub>2</sub>)
 have the same unit (usually mm or cm).
 
+## Important notice
+
+Lenscalc requires Python version 3.8 or above.
+
 ## How to use the calculator
 
 There are a few ways how you can use the calculator.
