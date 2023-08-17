@@ -77,15 +77,15 @@ class Lens:
             return
 
         # Copy the lens equations to later manipulate with them.
-        self.equations = list(self.equations)
+        equations = list(self.equations)
 
         equation_index = 0
-        while missing_values and equation_index < len(self.equations):
-            equation = self.equations[equation_index]
+        while missing_values and equation_index < len(equations):
+            equation = equations[equation_index]
             common = set(missing_values) & equation.free_symbols
 
             if not common:
-                self.equations.remove(equation)
+                equations.remove(equation)
 
             elif len(common) == 1:
                 variable = common.pop()
@@ -102,7 +102,7 @@ class Lens:
 
                 setattr(self, str(variable), self.replacements[str(variable)])
                 missing_values.remove(variable)
-                self.equations.remove(equation)
+                equations.remove(equation)
                 equation_index = 0
 
             else:
@@ -127,9 +127,9 @@ class Lens:
             return
 
         missing_values = [str(variable) for variable in missing_values]
-        if len(self.equations) > len(missing_values):
-            self.equations = self.equations[:len(missing_values)]
-        solved_equations = solve(self.equations, missing_values)
+        if len(equations) > len(missing_values):
+            equations = equations[:len(missing_values)]
+        solved_equations = solve(equations, missing_values)
         if isinstance(solved_equations, dict):
             if len(solved_equations) < len(missing_values):
                 solved_equations[Symbol("NPS")] = Symbol("NPS")
