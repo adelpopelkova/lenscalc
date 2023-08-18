@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lenscalc"
+version = "1.0.2"
+description = 'a lens calculator'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = [
+  "sympy",
+]
+
+[project.urls]
+Source = "https://github.com/adelpopelkova/lenscalc"
+
+[tool.hatch.build.targets.sdist]
+only-include = ["lenscalc.py"]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["lenscalc.py"]
